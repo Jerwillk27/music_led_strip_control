@@ -154,6 +154,27 @@
                 "reverse": false,
                 "speed": 1
             },
+            "holiday_lights": {
+                "color_1": "blue",
+                "color_2": "red",
+                "custom_color_1": [
+                    0,
+                    0,
+                    255
+                ],
+                "custom_color_2": [
+                    255,
+                    0,
+                    0
+                ],
+                "alternate": "false",
+                "use_custom_color": "false",
+                "white": 0,
+                "led_width": 3,
+                "led_spacing": 15,
+                "interval": 1000,
+                "interval_enable": "false"
+            },
             "effect_music": {
                 "color": "blue"
             },
@@ -460,6 +481,27 @@
                 "mirror": false,
                 "reverse": false,
                 "speed": 1
+            },
+            "holiday_lights": {
+                "color_1": "blue",
+                "color_2": "red",
+                "custom_color_1": [
+                    0,
+                    0,
+                    255
+                ],
+                "custom_color_2": [
+                    255,
+                    0,
+                    0
+                ],
+                "alternate": "false",
+                "use_custom_color": "false",
+                "white": 0,
+                "led_width": 3,
+                "led_spacing": 15,
+                "interval": 1000,
+                "interval_enable": "false"
             },
             "effect_music": {
                 "color": "blue"
