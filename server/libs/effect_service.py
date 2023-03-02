@@ -25,6 +25,7 @@ from libs.effects.effect_fade import EffectFade  # pylint: disable=E0611, E0401
 from libs.effects.effect_rods import EffectRods  # pylint: disable=E0611, E0401
 from libs.effects.effect_wave import EffectWave  # pylint: disable=E0611, E0401
 from libs.effects.effect_off import EffectOff  # pylint: disable=E0611, E0401
+from libs.effects.effect_holiday_lights import EffectHolidayLights # pylint: disable=E0611, E0401
 from libs.effects_enum import EffectsEnum  # pylint: disable=E0611, E0401
 from libs.fps_limiter import FPSLimiter  # pylint: disable=E0611, E0401
 
