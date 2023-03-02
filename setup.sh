@@ -96,9 +96,9 @@ esac
 
 
 echo
-prompt -s "\t          ***************************************"
+prompt -s "\t          **************************************"
 prompt -s "\t          *  Installing $PROJ_NAME (Jerwillk27 fork) *"
-prompt -s "\t          ***************************************"
+prompt -s "\t          **************************************"
 echo
 
 # Update packages:
