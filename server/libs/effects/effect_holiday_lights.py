@@ -5,56 +5,85 @@ import numpy as np
 
 
 class EffectHolidayLights(Effect):
+    def __init__(self, device):
+        
+        # Call the constructor of the base class.
+        super(EffectHolidayLights, self).__init__(device)
+        
+        # Setup for "VU Meter" (don't change these)
+        self.interval_history = 0
+        self.alt = 1
+    
     def run(self):
+        
+        # Get the config of the current effect.
         effect_config = self.get_effect_config("effect_holiday_lights")
-        led_count = self._device.device_config["led_count"]
-        led_mid = self._device.device_config["led_mid"]
         
-        alternate = effect_config["alternate"]
-
-        audio_data = self.get_audio_data()
-        y = self.get_mel(audio_data)
-
-        if y is None:
-            return
-
-        y = np.copy(y)
-        self._dsp.gain.update(y)
-        y /= self._dsp.gain.value
-        scale = effect_config["scale"]
+        self._led_strip = self._device.device_config["led_strip"]
+        # Set Fallback Strip
+        # self._led_strip_translated = ws.WS2811_STRIP_RGB
         
-        # Scale by the width of the LED strip.
-        y *= float((led_count * scale) - 1)
-        y = np.copy(self._math_service.interpolate(y, led_count // 2))
-        
-        # Map color channels according to energy in the different freq bands.
-        self.prev_spectrum = np.copy(y)
-        spectrum = np.copy(self.prev_spectrum)
-        spectrum = np.array([j for i in zip(spectrum, spectrum) for j in i])
-        
-        # Color channel mappings.
-        r = int(np.mean(spectrum[:len(spectrum) // 3]**scale) * effect_config["r_multiplier"])
-        g = int(np.mean(spectrum[len(spectrum) // 3: 2 * len(spectrum) // 3]**scale) * effect_config["g_multiplier"])
-        b = int(np.mean(spectrum[2 * len(spectrum) // 3:]**scale) * effect_config["b_multiplier"])
-        
-        # Assign color to different frequency regions.
-        self.output[0, :r] = 255
-        self.output[0, r:] = 0
-        self.output[1, :g] = 255
-        self.output[1, g:] = 0
-        self.output[2, :b] = 255
-        self.output[2, b:] = 0
-        
-        # Apply blur to smooth the edges.
-        blur_amount = effect_config["blur"]
-        if blur_amount > 0:
-            self.output[0, :] = gaussian_filter1d(self.output[0, :], sigma=blur_amount)
-            self.output[1, :] = gaussian_filter1d(self.output[1, :], sigma=blur_amount)
-            self.output[2, :] = gaussian_filter1d(self.output[2, :], sigma=blur_amount)
-
-        if effect_config["mirror"]:
-            output_array = self.mirror_array(self.output, led_mid, led_count)
+        # Build an empty array. 
+        if "SK6812" in self._led_strip:
+            output_array = np.zeros((4, self._device.device_config["led_count"]))
         else:
-            output_array = self.output
-
-        self.queue_output_array_noneblocking(output_array)
+            output_array = np.zeros((3, self._device.device_config["led_count"]))
+            
+        if effect_config["use_custom_color"]:
+            # Fill the array with the selected color. (0 = red channel, 1 = green channel, 2 = blue channel)
+            s = effect_config["led_spacing"]  # This is the number of non-lit LEDs (spacing)
+            w = effect_config["led_width"]  # This is the number of lit LEDs (width)
+            n = 0  # This will be our counter to keep track of where we're at on the LED string
+            e = 1  # enable (write light bits) 1 = yes, 0 = no
+            if effect_config["interval_enable"]:
+                if self.interval_history >= effect_config["interval"]:
+                    if self.alt == 1:
+                        self.alt = 2
+                    elif self.alt == 2:
+                        self.alt = 1   
+            else:
+                self.alt = 1
+                
+            for i in range(self._device.device_config["led_count"]):
+                if e == 1:
+                    # lit LEDs
+                    start = n
+                    end = n + w
+                    if effect_config["alternate"]:
+                        if self.alt == 1:
+                            output_array[0][start:end] = effect_config["custom_color_1"][0]
+                            output_array[1][start:end] = effect_config["custom_color_1"][1]
+                            output_array[2][start:end] = effect_config["custom_color_1"][2]
+                            self.alt = 2
+                        elif self.alt == 2:
+                            output_array[0][start:end] = effect_config["custom_color_2"][0]
+                            output_array[1][start:end] = effect_config["custom_color_2"][1]
+                            output_array[2][start:end] = effect_config["custom_color_2"][2]
+                            self.alt = 1
+                    else:
+                        output_array[0][start:end] = effect_config["custom_color_1"][0]
+                        output_array[1][start:end] = effect_config["custom_color_1"][1]
+                        output_array[2][start:end] = effect_config["custom_color_1"][2]
+                        
+                    e = 0
+                    n = end
+                elif e == 0:
+                    # non-lit LEDs
+                    start = n
+                    end = n + s
+                    output_array[0][start:end] = 0
+                    output_array[1][start:end] = 0
+                    output_array[2][start:end] = 0
+                    e = 1
+                    n = end
+        else:
+            # Fill the array with the selected color. (0 = red channel, 1 = green channel, 2 = blue channel)
+            s = effect_config["led_spacing"]  # This is the nubmer of non-liet LEDs (spacing)
+            w = effect_config["led_width"]  # This is the number of lit LEDs (width)
+            n = 0
+            e = 1
+            if effect_config["interval_enable"]:
+                if self.interval_history > = effect_config["interval"]:
+                    if self.alt == 1:
+                        
+                        
