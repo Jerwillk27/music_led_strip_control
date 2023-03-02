@@ -79,7 +79,8 @@ class EffectService():
             EffectsEnum.effect_direction_changer: EffectDirectionChanger,
             EffectsEnum.effect_beat_twinkle: EffectBeatTwinkle,
             EffectsEnum.effect_segment_color: EffectSegmentColor,
-            EffectsEnum.effect_fireplace: EffectFireplace
+            EffectsEnum.effect_fireplace: EffectFireplace,
+            EffectsEnum.effect_holiday_lights: EffectHolidayLights
         }
 
         self._initialized_effects = {}
