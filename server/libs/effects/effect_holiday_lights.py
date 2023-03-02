@@ -83,7 +83,7 @@ class EffectHolidayLights(Effect):
             n = 0
             e = 1
             if effect_config["interval_enable"]:
-                if self.interval_history > = effect_config["interval"]:
+                if self.interval_history >= effect_config["interval"]:
                     if self.alt == 1:
                         output_array[0][start:end] = self._config_colours[effect_config["color_1"]][0]
                         output_array[1][start:end] = self._config_colours[effect_config["color_1"]][1]
