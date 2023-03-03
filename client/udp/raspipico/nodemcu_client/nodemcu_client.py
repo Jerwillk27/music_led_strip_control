@@ -1,6 +1,6 @@
 from neopixel import Neopixel
 from time import sleep
-from machine import pin
+from machine import Pin
 import network
 import socket
 
@@ -35,7 +35,7 @@ UDP_SENDER_IP = ""
 # FUNCTIONS
 # ---------------------------
 
-def WiFiConnect():
+def do_wificonnect():
     wlan.active(True)
     if not wlan.isconnected():
         print('connecting to network')
@@ -45,7 +45,7 @@ def WiFiConnect():
         wifistatus_led.on()
         print('network config:', wlan.ifconfig())
     
-def WiFiDisconnect():
+def do_wifidisconnect():
     print('disconnecting wifi')
     wlan.disconnect()
     wlan.active(False)
@@ -55,10 +55,11 @@ def WiFiDisconnect():
 # MAIN
 # ---------------------------
 
-WifiConnect()
+do_wificonnect()
 while True:
     while wlan.isconnected():
         
+        print('opening udp socket')
         UDPSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         UDPSocket.bind((wlan.ifconfig()[0], UDP_PORT))
         
