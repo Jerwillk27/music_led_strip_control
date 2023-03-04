@@ -18,7 +18,8 @@ class EffectNames():
         "effect_rods": "Rods",
         "effect_segment_color": "Segment Color",
         "effect_fireplace": "Fireplace",
-        "effect_strobe": "Strobe"
+        "effect_strobe": "Strobe",
+        "effect_holiday_lights": "Holiday Lights"
     }
 
     music = {
