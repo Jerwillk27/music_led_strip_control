@@ -1,0 +1,125 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Edit Holiday Lights {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Holiday Lights</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Edit Effects</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Holiday Lights</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+
+                    {% include 'includes/devices.html' %}
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Holiday Lights Settings</h5>
+                                </div>
+                                <div class="card-block">
+                                    <p>Choose the color for the lights.</p>
+                                    <input type="hidden" id="settingsIdentifier" value="effect">
+                                    <input type="hidden" id="effectIdentifier" value="effect_holiday_lights">
+                                    <form id="settingsForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>LED Color 1</label>
+                                                    <select id="color_1" class="form-control colors setting_input"></select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>LED Color 2</label>
+                                                    <select id="color_2" class="form-control colors setting_input"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Custom Color 1</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text pr-4" id="color_picker_1"></span>
+                                                    </div>
+                                                    <input type="text" class="form-control setting_input color_input" id="custom_color_1" spellcheck="false">
+                                                </div>
+                                                <label>Custom Color 2</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text pr-4" id="color_picker_2"></span>
+                                                    </div>
+                                                    <input type="text" class="form-control setting_input color_input" id="custom_color_2" spellcheck="false">
+                                                </div>
+                                                <div class="custom-control custom-checkbox my-2">
+                                                    <input type="checkbox" class="custom-control-input setting_input" id="use_custom_color">
+                                                    <label class="custom-control-label" for="use_custom_color">Use Custom Color</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>White Channel (RGBW), only for SK6812 <span for="white" class="mb-0 badge badge-secondary"></span></label>
+                                                    <input id="white" type="range" class="custom-range setting_input" min="0" max="255" step="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>LED width <span for="led_width" class="mb-0 badge badge-secondary"></span></label>
+                                                    <input id="led_width" type="range" class="custom-range setting_input" min="1" max="30" step="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>LED spacing <span for="led_spacing" class="mb-0 badge badge-secondary"></span></label>
+                                                    <input id="led_spacing" type="range" class="custom-range setting_input" min="1" max="50" step="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="checkbox" class="custom-control-input setting_input" id="alternate">
+                                                    <label class="custom-control-label" for="alternate"> Alternate Color 1 and 2</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Color change interval <span for="interval" class="mb-0 badge badge-secondary"></span></label>
+                                                    <input id="interval" type="range" class="custom-range setting_input" min="10" max="200" step="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="checkbox" class="custom-control-input setting_input" id="interval_enable">
+                                                    <label class="custom-control-label" for="interval_enable">Enable color change</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 d-flex flex-md-row flex-column justify-content-md-end">
+                                            <button type="button" id="save_btn" class="btn btn-success m-0">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="/static/assets/plugins/pickr/js/pickr.min.js" type="module"></script>
+<script src="/static/assets/js/settings.effect.js" type="module"></script>
+{% endblock javascripts %}
