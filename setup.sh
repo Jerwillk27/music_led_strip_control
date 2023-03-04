@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setup script for MLSC
-# https://github.com/TobKra96/music_led_strip_control
+# https://github.com/Jerwillk27/music_led_strip_control
 
 
 INST_DIR="/share" # Installation location
