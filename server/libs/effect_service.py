@@ -8,6 +8,7 @@ from libs.effects.effect_beat_slide import EffectBeatSlide  # pylint: disable=E0
 from libs.effects.effect_fireplace import EffectFireplace  # pylint: disable=E0611, E0401
 from libs.effects.effect_sync_fade import EffectSyncFade  # pylint: disable=E0611, E0401
 from libs.effects.effect_gradient import EffectGradient  # pylint: disable=E0611, E0401
+from libs.effects.effect_holiday_lights import EffectHolidayLights #pylint: disable=E0611, E0401
 from libs.effects.effect_pendulum import EffectPendulum  # pylint: disable=E0611, E0401
 from libs.effects.effect_vu_meter import EffectVuMeter  # pylint: disable=E0611, E0401
 from libs.effects.effect_twinkle import EffectTwinkle  # pylint: disable=E0611, E0401
@@ -64,6 +65,7 @@ class EffectService():
             EffectsEnum.effect_bubble: EffectBubble,
             EffectsEnum.effect_twinkle: EffectTwinkle,
             EffectsEnum.effect_pendulum: EffectPendulum,
+            EffectsEnum.effect_holiday_lights: EffectHolidayLights,
             EffectsEnum.effect_rods: EffectRods,
             EffectsEnum.effect_segment_color: EffectSegmentColor,
             EffectsEnum.effect_fireplace: EffectFireplace,
