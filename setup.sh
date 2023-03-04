@@ -96,9 +96,9 @@ esac
 
 
 echo
-prompt -s "\t          *********************"
-prompt -s "\t          *  Installing $PROJ_NAME  *"
-prompt -s "\t          *********************"
+prompt -s "\t          **************************************"
+prompt -s "\t          *  Installing $PROJ_NAME (Jerwillk Fork) *"
+prompt -s "\t          **************************************"
 echo
 
 # Update packages:
@@ -139,7 +139,7 @@ if [[ -d $PROJ_DIR ]]; then
         fi
 	    sudo mv -T $PROJ_DIR "${PROJ_DIR}_bak"
         prompt -s "\nNew backup of ${PROJ_NAME} created."
-        sudo git clone --depth 1 --branch $GIT_BRANCH https://github.com/TobKra96/music_led_strip_control.git
+        sudo git clone --depth 1 --branch $GIT_BRANCH https://github.com/Jerwillk27/music_led_strip_control.git
         prompt -s "\nConfig is stored in .mlsc, in the same directory as the MLSC installation."
         if [[ -f $SERVICE_DIR ]]; then
             if [[ $systemctl_status == 'active' ]]; then
@@ -149,7 +149,7 @@ if [[ -d $PROJ_DIR ]]; then
         fi
     fi
 else
-    sudo git clone --depth 1 --branch $GIT_BRANCH https://github.com/TobKra96/music_led_strip_control.git
+    sudo git clone --depth 1 --branch $GIT_BRANCH https://github.com/Jerwillk27/music_led_strip_control.git
 fi
 
 # Install/update modules from requirements.txt.
